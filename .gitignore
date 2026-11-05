@@ -1,0 +1,8 @@
+target/
+fixtures.json
+.env
+.env.*
+!.env.example
+*.wasm
+*.stellar-workspace
+
