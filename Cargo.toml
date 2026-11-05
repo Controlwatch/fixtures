@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = []
+members = ["contracts/identity-verifier"]
 
 [workspace.package]
 edition = "2024"
