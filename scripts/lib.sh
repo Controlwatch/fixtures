@@ -49,9 +49,9 @@ wasm_path() {
 }
 
 stellar_testnet() {
-  stellar "$@" \
-    --rpc-url "${RPC_URL}" \
-    --network-passphrase "${NETWORK_PASSPHRASE}"
+  STELLAR_RPC_URL="${RPC_URL}" \
+    STELLAR_NETWORK_PASSPHRASE="${NETWORK_PASSPHRASE}" \
+    stellar "$@"
 }
 
 require_testnet
