@@ -313,11 +313,62 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2459377285ad874054d797f3ccebf984978aa39129f6eafde5cdc8315b612f8"
 
 [[package]]
+name = "controlwatch-claim-topics-and-issuers"
+version = "0.1.0"
+dependencies = [
+ "soroban-sdk",
+ "stellar-access",
+ "stellar-macros",
+ "stellar-tokens",
+]
+
+[[package]]
+name = "controlwatch-compliance"
+version = "0.1.0"
+dependencies = [
+ "soroban-sdk",
+ "stellar-access",
+ "stellar-macros",
+ "stellar-tokens",
+]
+
+[[package]]
+name = "controlwatch-identity-registry"
+version = "0.1.0"
+dependencies = [
+ "soroban-sdk",
+ "stellar-access",
+ "stellar-macros",
+ "stellar-tokens",
+]
+
+[[package]]
 name = "controlwatch-identity-verifier"
 version = "0.1.0"
 dependencies = [
  "soroban-sdk",
  "stellar-access",
+ "stellar-macros",
+ "stellar-tokens",
+]
+
+[[package]]
+name = "controlwatch-module-a"
+version = "0.1.0"
+dependencies = [
+ "soroban-sdk",
+ "stellar-access",
+ "stellar-macros",
+ "stellar-tokens",
+]
+
+[[package]]
+name = "controlwatch-rwa-token"
+version = "0.1.0"
+dependencies = [
+ "soroban-sdk",
+ "stellar-access",
+ "stellar-contract-utils",
  "stellar-macros",
  "stellar-tokens",
 ]
