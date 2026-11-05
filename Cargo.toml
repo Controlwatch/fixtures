@@ -3,6 +3,7 @@ resolver = "2"
 members = [
     "contracts/compliance",
     "contracts/identity-verifier",
+    "contracts/identity-registry",
     "contracts/module-a",
     "contracts/rwa-token",
 ]
