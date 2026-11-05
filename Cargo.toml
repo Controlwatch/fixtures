@@ -4,6 +4,7 @@ members = [
     "contracts/compliance",
     "contracts/identity-verifier",
     "contracts/module-a",
+    "contracts/rwa-token",
 ]
 
 [workspace.package]
