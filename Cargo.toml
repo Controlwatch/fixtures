@@ -3,6 +3,7 @@ resolver = "2"
 members = [
     "contracts/compliance",
     "contracts/identity-verifier",
+    "contracts/module-a",
 ]
 
 [workspace.package]
