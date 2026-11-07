@@ -1,11 +1,12 @@
 //! RWA Token Example Contract.
 
 use soroban_sdk::{
-    Address, Env, MuxedAddress, String, Symbol, Vec, contract, contractimpl, panic_with_error,
-    symbol_short,
+    Address, BytesN, Env, MuxedAddress, String, Symbol, Vec, contract, contractimpl,
+    panic_with_error, symbol_short,
 };
 use stellar_access::access_control::{self as access_control, AccessControl};
 use stellar_contract_utils::pausable::{self as pausable, Pausable};
+use stellar_contract_utils::upgradeable::{self as upgradeable, Upgradeable};
 use stellar_macros::{only_admin, only_role};
 use stellar_tokens::{
     fungible::{
@@ -199,3 +200,11 @@ impl RWAToken for RWATokenContract {
 
 #[contractimpl(contracttrait)]
 impl AccessControl for RWATokenContract {}
+
+#[contractimpl]
+impl Upgradeable for RWATokenContract {
+    #[only_role(operator, "manager")]
+    fn upgrade(e: &Env, new_wasm_hash: BytesN<32>, operator: Address) {
+        upgradeable::upgrade(e, &new_wasm_hash);
+    }
+}
