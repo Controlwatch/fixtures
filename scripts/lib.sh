@@ -9,6 +9,8 @@ readonly TESTNET_PASSPHRASE="Test SDF Network ; September 2015"
 NETWORK="${NETWORK:-testnet}"
 NETWORK_PASSPHRASE="${NETWORK_PASSPHRASE:-${TESTNET_PASSPHRASE}}"
 RPC_URL="${RPC_URL:-https://soroban-testnet.stellar.org}"
+STELLAR_CLI="${STELLAR_CLI:-stellar}"
+WASM_ROOT="${WASM_ROOT:-${REPO_ROOT}}"
 
 if [[ -f "${REPO_ROOT}/.env" ]]; then
   # shellcheck disable=SC1091
@@ -63,13 +65,13 @@ fixture_value() {
 wasm_path() {
   local package_name="$1"
   printf '%s/target/wasm32v1-none/release/%s.wasm' \
-    "${REPO_ROOT}" "${package_name//-/_}"
+    "${WASM_ROOT}" "${package_name//-/_}"
 }
 
 stellar_testnet() {
   STELLAR_RPC_URL="${RPC_URL}" \
     STELLAR_NETWORK_PASSPHRASE="${NETWORK_PASSPHRASE}" \
-    stellar "$@"
+    "${STELLAR_CLI}" "$@"
 }
 
 require_testnet

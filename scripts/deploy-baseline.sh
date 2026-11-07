@@ -3,7 +3,7 @@
 set -euo pipefail
 source "$(dirname "$0")/lib.sh"
 
-require_command stellar
+require_command "${STELLAR_CLI}"
 
 ADMIN_IDENTITY="${ADMIN_IDENTITY:-controlwatch-admin}"
 MANAGER_IDENTITY="${MANAGER_IDENTITY:-controlwatch-manager}"
@@ -11,10 +11,14 @@ MANAGER_IDENTITY="${MANAGER_IDENTITY:-controlwatch-manager}"
 require_value ADMIN_IDENTITY
 require_value MANAGER_IDENTITY
 
-ADMIN_ADDRESS="$(stellar keys public-key "${ADMIN_IDENTITY}")"
-MANAGER_ADDRESS="$(stellar keys public-key "${MANAGER_IDENTITY}")"
+ADMIN_ADDRESS="$("${STELLAR_CLI}" keys public-key "${ADMIN_IDENTITY}")"
+MANAGER_ADDRESS="$("${STELLAR_CLI}" keys public-key "${MANAGER_IDENTITY}")"
 
 build_contracts() {
+  if [[ "${SKIP_BUILD:-0}" == "1" ]]; then
+    echo "reusing existing contract builds (SKIP_BUILD=1)" >&2
+    return
+  fi
   local package
   for package in \
     controlwatch-claim-topics-and-issuers \
@@ -23,7 +27,7 @@ build_contracts() {
     controlwatch-identity-verifier \
     controlwatch-module-a \
     controlwatch-rwa-token; do
-    stellar contract build --package "${package}"
+    "${STELLAR_CLI}" contract build --package "${package}"
   done
 }
 
