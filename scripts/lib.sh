@@ -42,6 +42,24 @@ require_value() {
   fi
 }
 
+require_fixtures() {
+  if [[ ! -f "${REPO_ROOT}/fixtures.json" ]]; then
+    echo "fixtures.json not found; run scripts/deploy-baseline.sh first" >&2
+    exit 2
+  fi
+}
+
+fixture_value() {
+  local key="$1"
+  local value
+  value="$(awk -F'"' -v key="${key}" '$2 == key { print $4; exit }' "${REPO_ROOT}/fixtures.json")"
+  if [[ -z "${value}" ]]; then
+    echo "fixtures.json has no value for ${key}" >&2
+    exit 2
+  fi
+  printf '%s' "${value}"
+}
+
 wasm_path() {
   local package_name="$1"
   printf '%s/target/wasm32v1-none/release/%s.wasm' \
